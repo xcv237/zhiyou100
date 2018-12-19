@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<include file="com/zhiyou100/login/struts.xml"></include>
+	<include file="com/zhiyou100/login2/struts.xml"></include>
+	<include file="com/zhiyou100/login3/struts.xml"></include>
+	<include file="com/zhiyou100/login4/struts.xml"></include>
+	<include file="com/zhiyou100/invocation/struts.xml"></include>
+</struts>

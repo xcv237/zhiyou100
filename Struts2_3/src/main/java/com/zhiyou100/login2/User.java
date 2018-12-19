@@ -1,0 +1,9 @@
+package com.zhiyou100.login2;
+
+import lombok.Data;
+
+@Data
+public class User {
+	private String username;
+	private Integer password;
+}

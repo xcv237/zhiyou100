@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="login5PKG" extends="struts-default" namespace="/login5">
+		<interceptors>
+			<interceptor name="loginIov" class="com.zhiyou100.invocation.LoginInvocation">
+				<param name="n">login5,user</param>
+			</interceptor>
+			<interceptor-stack name="myStack">
+					<interceptor-ref name="loginIov"/>
+					<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<!--定义默认拦截器引用，否则需要每个Action都需要单独写拦截器  -->
+		<!--loginAction，无法获取参数  -->
+		<!--答：因为我们在定义默认拦截器引用时，使用的是默认的拦截器defaultStack，里面包含了参数注入拦截器等很多拦截器，而我们设置拦截器后无法再使用拦截器defaultStack，所以无法获取参数  -->
+		<!--解决：拦截器栈是种集合，我们只要在设置的拦截器里再添一个拦截器defaultStack的集合  -->
+		<!--但是默认拦截器也会拦截loginAction无法在session中存放user对象  -->
+		<!--解决方案1：不让LoginAction使用默认拦截器，使用拦截器defaultStack  -->
+		<!--解决方案2：对拦截器  -->
+		<default-interceptor-ref name="myStack"/>
+		<!--全局结果视图，大部分我们返回逻辑视图的时候，Struts2会寻找全局结果视图，如果找到就会直接返回物理视图，如果找不到就会返回Action寻找，如果还找不到就会显示406  -->
+		<global-results>
+			<result name="login">/index.jsp</result>
+		</global-results>
+		<action name="login5" class="com.zhiyou100.invocation.LoginAction">
+			<interceptor-ref name="defaultStack"/>
+			<result >/success.jsp</result>
+		</action>
+		<action name="user" class="com.zhiyou100.invocation.UserAction">
+			<!-- <interceptor-ref name="loginIov"/> -->
+		</action>
+		
+	</package>
+</struts>
